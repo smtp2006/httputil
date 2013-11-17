@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns="https://github.com/smtp2006/httputil/httputil-1.0.xsd" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="https://github.com/smtp2006/httputil/" 
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+    
+    
+</xsd:schema>
