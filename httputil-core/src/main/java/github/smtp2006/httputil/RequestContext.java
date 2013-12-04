@@ -6,14 +6,22 @@ package github.smtp2006.httputil;
 import java.util.Map;
 
 /**
- * @author 王华
- * @version 2013年11月28日 上午11:13:01
+ * The context of Request.
+ * 
+ * 
+ * <pre>
+ * Put key into RequestContext, then get value if need.
+ * </pre>
+ * 
+ * 
+ * @author hua.wanghuawh
+ * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
 public interface RequestContext extends Map<String, Object> {
 
     /**
-     * 当value = null时,返回默认false
+     * return false as value is null
      * 
      * @param k
      * @return
@@ -21,7 +29,7 @@ public interface RequestContext extends Map<String, Object> {
     boolean getBooleanWithDefaultAsNull(String k);
 
     /**
-     * 当value = null时,返回指定值
+     * return the target value as value is null
      * 
      * @param k
      * @param v

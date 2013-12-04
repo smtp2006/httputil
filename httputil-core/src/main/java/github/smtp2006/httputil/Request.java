@@ -7,40 +7,53 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * @author 王华
- * @version 2013年11月28日 上午11:12:27
+ * 
+ * @author hua.wanghuawh
+ * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
 public interface Request {
-    /**
-     * 
-     */
-    String HTTP_CHARSET = "http.charset";
-    String HTTP_CHARSET_DEFAULT = "UTF-8";
-    String HTTP_RANDOM = "http.random";
 
     /**
+     * RequestContext key for http url encode.
+     */
+    String HTTP_CHARSET = "http.charset";
+
+    /**
+     * Default value for HTTP_CHARSET.
+     */
+    String HTTP_CHARSET_DEFAULT = "UTF-8";
+
+    /**
+     * HTTP Scheme
+     * 
+     * @return
+     */
+    String getName();
+
+    /**
+     * HTTP Scheme
      * 
      * @return
      */
     HTTPScheme getScheme();
 
     /**
-     * 服务地址
+     * HTTP Service`s host
      * 
      * @return
      */
     String getHost();
 
     /**
-     * 服务端口
+     * HTTP Service`s port
      * 
      * @return
      */
     int getPort();
 
     /**
-     * 服务URI
+     * HTTP URI
      * 
      * @return
      */
@@ -54,37 +67,56 @@ public interface Request {
     HTTPMethod getMethod();
 
     /**
-     * URL参数
+     * HTTP parameters
      * 
      * @return
      */
     Map<String, String> getParameters();
 
     /**
-     * Header参数
+     * HTTP headers
      * 
      * @return
      */
     Map<String, String> getHeaders();
 
     /**
-     * RequestInterceptor,拦截器,可以修改Request
+     * RequestInterceptor, which can wrap Request with RequestContext.
+     * 
+     * <pre>
+     * Add Parameters
+     * </pre>
+     * 
+     * <pre>
+     * Add Headers
+     * </pre>
      * 
      * @return
      */
     Collection<RequestInterceptor> getInterceptors();
 
     /**
-     * 处理HTTP Response
+     * ResponseHandler, which can handle HTTP Response.
      * 
      * @return
      */
     ResponseHandler getResponseHandler();
 
     /**
-     * 返回Request上下文,上下文可以传递参数
+     * RequestContext, The context of request.
+     * 
+     * <pre>
+     * Put key into RequestContext, then get value if need.
+     * </pre>
      * 
      * @return
      */
     RequestContext getContext();
+
+    /**
+     * Generate unique id to trace request.
+     * 
+     * @return
+     */
+    RequestIdGenerator getRequestIdGenerator();
 }
