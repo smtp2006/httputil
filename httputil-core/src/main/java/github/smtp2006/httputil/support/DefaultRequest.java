@@ -20,7 +20,7 @@ import java.util.TreeMap;
  * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
-public class DefaultRequest implements Request {
+public class DefaultRequest implements Request, Cloneable {
 
     protected RequestContext context = new DefaultRequestContext();
 
@@ -164,6 +164,13 @@ public class DefaultRequest implements Request {
     public void setURI(String uri) {
 
         this.uri = uri;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        // TODO Auto-generated method stub
+        return super.clone();
     }
 
 }

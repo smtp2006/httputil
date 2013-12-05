@@ -4,8 +4,8 @@
 package github.smtp2006.httputil;
 
 /**
- * @author 王华
- * @version 2013年11月28日 上午11:12:39
+ * 
+ * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
 public interface RequestEngine {

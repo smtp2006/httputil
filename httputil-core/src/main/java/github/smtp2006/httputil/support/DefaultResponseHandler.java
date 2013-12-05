@@ -18,17 +18,25 @@ import java.util.Map;
  * @version 2013年11月29日 上午10:20:22
  * 
  */
-public class DefaultResponseHandler implements ResponseHandler {
+public class DefaultResponseHandler implements ResponseHandler, Cloneable {
 
     @Override
     public byte[] process(Response response) throws HTTPException {
+
         processStatusCode(response);
         byte[] content = processContent(response);
         peek(content);
         return content;
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        return this;
+    }
+
     protected int processStatusCode(Response response) throws HTTPException {
+
         int statusCode = response.getStatusCode();
         if (HTTP_OK != statusCode) {
             throw new HTTPException(statusCode);
@@ -37,10 +45,12 @@ public class DefaultResponseHandler implements ResponseHandler {
     }
 
     protected Map<String, String> processHeaders(Response response) {
+
         return response.getAllHeaders();
     }
 
     protected byte[] processContent(Response response) throws HTTPException {
+
         InputStream input = response.getContent();
         if (input != null) {
             ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -65,5 +75,6 @@ public class DefaultResponseHandler implements ResponseHandler {
     }
 
     protected void peek(byte[] content) throws HTTPException {
+
     }
 }

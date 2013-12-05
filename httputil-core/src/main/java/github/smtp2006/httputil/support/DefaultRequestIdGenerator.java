@@ -11,7 +11,7 @@ import github.smtp2006.httputil.RequestIdGenerator;
  * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
-public class DefaultRequestIdGenerator implements RequestIdGenerator {
+public class DefaultRequestIdGenerator implements RequestIdGenerator, Cloneable {
 
     /*
      * (non-Javadoc)
@@ -22,6 +22,12 @@ public class DefaultRequestIdGenerator implements RequestIdGenerator {
     public String genRequestId() {
 
         return UUID.randomUUID().toString();
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        return this;
     }
 
     /*

@@ -12,7 +12,7 @@ import java.util.Map;
  * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
  * 
  */
-public interface Request {
+public interface Request extends Cloneable {
 
     /**
      * RequestContext key for http url encode.
