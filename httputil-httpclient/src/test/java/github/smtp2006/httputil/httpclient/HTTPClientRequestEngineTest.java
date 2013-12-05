@@ -31,5 +31,9 @@ public class HTTPClientRequestEngineTest {
             }
         });
         engine.process(baiduRequest, new DefaultRequestContext());
+        
+        StringBuilder sb = new StringBuilder("www.baidu.com?a=b&");
+        System.err.println(sb.charAt(sb.length() - 1) == '&' ? sb.substring(0, sb.length() - 1) : sb.toString());
+        
     }
 }

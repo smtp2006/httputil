@@ -6,6 +6,7 @@ package github.smtp2006.httputil.support;
 import github.smtp2006.httputil.Request;
 import github.smtp2006.httputil.RequestHolder;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -36,6 +37,20 @@ public class DefaultRequestHolder implements RequestHolder {
      */
     public Request addRequest(Request request) {
 
+        if (requestMap.containsKey(request.getName())) {
+            throw new IllegalArgumentException("Duplicated name[" + request.getName() + "]");
+        }
         return requestMap.put(request.getName(), request);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see github.smtp2006.httputil.RequestHolder#getAll()
+     */
+    @Override
+    public Collection<Request> getAll() {
+
+        return requestMap.values();
     }
 }

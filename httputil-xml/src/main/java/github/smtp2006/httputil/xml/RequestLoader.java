@@ -3,9 +3,7 @@
  */
 package github.smtp2006.httputil.xml;
 
-import github.smtp2006.httputil.Request;
-
-import java.util.Map;
+import github.smtp2006.httputil.RequestHolder;
 
 /**
  * @author 王华
@@ -13,5 +11,5 @@ import java.util.Map;
  * 
  */
 public interface RequestLoader {
-    Map<String, Request> process(String file);
+    RequestHolder process(String file);
 }

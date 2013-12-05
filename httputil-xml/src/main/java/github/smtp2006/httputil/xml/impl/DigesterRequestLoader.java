@@ -6,6 +6,7 @@ package github.smtp2006.httputil.xml.impl;
 import java.util.Map;
 
 import github.smtp2006.httputil.Request;
+import github.smtp2006.httputil.RequestHolder;
 import github.smtp2006.httputil.xml.RequestLoader;
 
 /**
@@ -19,7 +20,7 @@ public class DigesterRequestLoader implements RequestLoader {
      * @see github.smtp2006.httputil.xml.RequestLoader#process(java.lang.String)
      */
     @Override
-    public Map<String, Request> process(String file) {
+    public RequestHolder process(String file) {
         // TODO Auto-generated method stub
         return null;
     }

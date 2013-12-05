@@ -119,4 +119,6 @@ public interface Request extends Cloneable {
      * @return
      */
     RequestIdGenerator getRequestIdGenerator();
+
+    Object clone() throws CloneNotSupportedException;
 }

@@ -3,6 +3,8 @@
  */
 package github.smtp2006.httputil;
 
+import java.util.Collection;
+
 /**
  * 
  * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
@@ -16,4 +18,6 @@ public interface RequestHolder {
      * @return
      */
     Request getRequest(String name);
+    
+    Collection<Request> getAll();
 }

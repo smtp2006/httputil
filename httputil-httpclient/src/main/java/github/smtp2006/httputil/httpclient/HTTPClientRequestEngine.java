@@ -20,6 +20,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
@@ -248,6 +249,8 @@ public class HTTPClientRequestEngine implements RequestEngine {
             while (pit.hasNext()) {
                 try {
                     String key = pit.next();
+                    String value = request.getParameters().get(key);
+                    if (StringUtils.isEmpty(value)) continue;
                     sb.append(URLEncoder.encode(key, charset));
                     sb.append('=');
                     sb.append(URLEncoder.encode(request.getParameters().get(key), charset));
@@ -258,9 +261,8 @@ public class HTTPClientRequestEngine implements RequestEngine {
                     LOG.error("UnsupportedEncodingException " + charset, e);
                 }
             }
-
         }
         LOG.info("buildURL[{}]:{}", ++step, sb.toString());
-        return sb.toString();
+        return sb.charAt(sb.length() - 1) == '&' ? sb.substring(0, sb.length() - 1) : sb.toString();
     }
 }
