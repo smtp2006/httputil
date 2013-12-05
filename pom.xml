@@ -99,5 +99,6 @@
         <module>httputil-httpclient</module>
         <module>httputil-web</module>
     <module>httputil-xml</module>
+    <module>httputil-template</module>
   </modules>
 </project>

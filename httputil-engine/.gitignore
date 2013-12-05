@@ -6,5 +6,6 @@
 *.jar
 *.war
 *.ear
+/bin
 /target
 /.settings
