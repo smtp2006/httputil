@@ -66,6 +66,15 @@ public class DefaultRequest implements Request, Cloneable {
         this.headers = headers;
     }
 
+    public void addHeaders(String name, String value) {
+
+        if (this.headers == null) {
+            headers = new TreeMap<String, String>();
+        }
+
+        headers.put(name, value);
+    }
+
     public String getHost() {
 
         return host;
@@ -114,6 +123,16 @@ public class DefaultRequest implements Request, Cloneable {
     public void setParameters(Map<String, String> parameters) {
 
         this.parameters = parameters;
+    }
+
+    public void addParameter(String name, String value) {
+
+        if (this.parameters == null) {
+            parameters = new TreeMap<String, String>();
+        }
+
+        parameters.put(name, value);
+
     }
 
     public int getPort() {

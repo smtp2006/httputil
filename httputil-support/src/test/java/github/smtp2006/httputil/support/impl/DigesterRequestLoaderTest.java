@@ -24,6 +24,8 @@ public class DigesterRequestLoaderTest {
             System.out.println(r.getScheme());
             System.out.println(r.getHost());
             System.out.println(r.getPort());
+            System.out.println(r.getHeaders());
+            System.out.println(r.getParameters());
         }
             
     }
