@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<requestHolder>
+    <request id="www.baidu.com/1">
+        <host>www.baidu.com</host>
+    </request>
+    <request id="www.baidu.com/2" class="github.smtp2006.httputil.support.DefaultRequest">
+        <method>POST</method>
+        <scheme>https</scheme>
+        <host>www.baidu.com</host>
+        <port>8080</port>
+        <parameters>
+            <parameter name="r" value="1234" />
+            <parameter name="r1" />
+
+        </parameters>
+    </request>
+</requestHolder>

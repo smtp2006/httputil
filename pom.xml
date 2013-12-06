@@ -100,5 +100,6 @@
         <module>httputil-web</module>
     <module>httputil-xml</module>
     <module>httputil-template</module>
+    <module>httputil-support</module>
   </modules>
 </project>
