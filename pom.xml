@@ -95,11 +95,11 @@
     </build>
     <modules>
         <module>httputil-core</module>
-        <module>httputil-engine</module>
+        
         <module>httputil-httpclient</module>
         <module>httputil-web</module>
-    <module>httputil-xml</module>
-    <module>httputil-template</module>
+    
+    
     <module>httputil-support</module>
   </modules>
 </project>
