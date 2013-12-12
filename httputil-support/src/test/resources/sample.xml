@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<requestHolder>
-    <request id="www.baidu.com/1">
-        <host>www.baidu.com</host>
-    </request>
-    <request id="www.baidu.com/2" class="github.smtp2006.httputil.support.DefaultRequest">
-        <method>POST</method>
+<namespace name="sync.aliyun.com">
+    <requestHolder>
+        <description>ACloudDB结构化存储</description>
         <scheme>https</scheme>
-        <host>www.baidu.com</host>
-        <port>8080</port>
-        <parameters>
-            <parameter name="r" value="1234" />
-            <parameter name="r1" />
+        <host>sync.aliyun.com</host>
+        <port>443</port>
+        <request id="op=query">
+        </request>
+        <request id="op=paging_by_range" class="github.smtp2006.httputil.support.DefaultRequest">
+            <parameters>
+                <parameter name="r" value="1234" />
+                <parameter name="r1" />
+            </parameters>
+        </request>
+    </requestHolder>
+</namespace>
 
-        </parameters>
-    </request>
-</requestHolder>

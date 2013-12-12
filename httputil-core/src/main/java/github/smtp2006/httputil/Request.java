@@ -32,6 +32,13 @@ public interface Request extends Cloneable {
     String getName();
 
     /**
+     * Description.
+     * 
+     * @return
+     */
+    String getDescription();
+
+    /**
      * HTTP Scheme
      * 
      * @return
@@ -57,7 +64,7 @@ public interface Request extends Cloneable {
      * 
      * @return
      */
-    String getURI();
+    String getUri();
 
     /**
      * HTTPMethod

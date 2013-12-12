@@ -227,8 +227,8 @@ public class HTTPClientRequestEngine implements RequestEngine {
         if (0 != request.getPort() && 80 != request.getPort()) {
             sb.append(":").append(request.getPort());
         }
-        if (request.getURI() != null) {
-            sb.append(request.getURI());
+        if (request.getUri() != null) {
+            sb.append(request.getUri());
         }
         LOG.info("buildURL[{}]:{}", ++step, sb.toString());
 

@@ -7,7 +7,8 @@ import static org.apache.commons.beanutils.BeanUtils.setProperty;
 import static org.apache.commons.beanutils.MethodUtils.invokeExactMethod;
 import github.smtp2006.httputil.HTTPMethod;
 import github.smtp2006.httputil.HTTPScheme;
-import github.smtp2006.httputil.RequestHolder;
+import github.smtp2006.httputil.NamespaceRequestHolder;
+import github.smtp2006.httputil.support.DefaultNamespaceRequestHolder;
 import github.smtp2006.httputil.support.DefaultRequest;
 import github.smtp2006.httputil.support.DefaultRequestHolder;
 import github.smtp2006.httputil.support.RequestLoader;
@@ -24,36 +25,45 @@ import org.xml.sax.Attributes;
  */
 public class DigesterRequestLoader implements RequestLoader {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * github.smtp2006.httputil.template.RequestLoader#load(java.lang.String)
-     */
     @Override
-    public RequestHolder load(String file) {
+    public NamespaceRequestHolder load(String file) {
 
         Digester digester = new Digester();
-        RequestHolder holder = new DefaultRequestHolder();
-        digester.push(holder);
+        NamespaceRequestHolder nrw = new DefaultNamespaceRequestHolder();
+        digester.push(nrw);
         InputStream fileInputStream = DigesterRequestLoader.class.getClassLoader().getResourceAsStream(file);
-        digester.addObjectCreate("requestHolder/request", "class", DefaultRequest.class);
+        // Create Object
+        digester.addObjectCreate("namespace", DefaultRequestHolder.class);
+        // setNamespace
+        digester.addSetProperties("namespace", "name", "namespace");
+        // setHost
+        digester.addBeanPropertySetter("namespace/requestHolder/description");
+        // setScheme
+        digester.addRule("namespace/requestHolder/scheme", new HTTPSchemeRule());
+        // setHost
+        digester.addBeanPropertySetter("namespace/requestHolder/host");
+        // setPort
+        digester.addBeanPropertySetter("namespace/requestHolder/port");
 
-        digester.addSetProperties("requestHolder/request", "id", "name");
-        digester.addBeanPropertySetter("requestHolder/request/host");
-        digester.addBeanPropertySetter("requestHolder/request/port");
-        digester.addBeanPropertySetter("requestHolder/request/uri");
+        // Parse Request
+        // Create Request
+        digester.addObjectCreate("namespace/requestHolder/request", "class", DefaultRequest.class);
+        digester.addSetProperties("namespace/requestHolder/request", "id", "name");
+        digester.addBeanPropertySetter("namespace/requestHolder/request/uri");
 
-        digester.addRule("requestHolder/request/method", new HTTPMethodRule());
-        digester.addRule("requestHolder/request/scheme", new HTTPSchemeRule());
+        digester.addRule("namespace/requestHolder/request/method", new HTTPMethodRule());
 
-        digester.addRule("requestHolder/request/parameters/parameter", new ParameterRule());
-        digester.addRule("requestHolder/request/headers/header", new HeaderRule());
-        digester.addSetNext("requestHolder/request", "addRequest");
+        digester.addRule("namespace/requestHolder/request/parameters/parameter", new ParameterRule());
+        digester.addRule("namespace/requestHolder/request/headers/header", new HeaderRule());
+        digester.addSetNext("namespace/requestHolder/request", "addRequest");
+        digester.addSetNext("namespace/requestHolder", "addRequestHolder");
         try {
             digester.parse(fileInputStream);
-        } catch (Exception e) {}
-        return holder;
+        } catch (Exception e) {
+
+            throw new RuntimeException(e);
+        }
+        return nrw;
     }
 
     private static class HTTPSchemeRule extends Rule {
@@ -135,8 +145,9 @@ public class DigesterRequestLoader implements RequestLoader {
 
             // Get a reference to the top object
             Object top = getDigester().peek();
-            invokeExactMethod(top, "addParameter", new String[] { this.name, this.value }, new Class[] { String.class,
-                    String.class });
+            invokeExactMethod(top, "addParameter",
+                    new String[] { this.name, this.value },
+                    new Class[] { String.class, String.class });
         }
 
     }
@@ -170,9 +181,11 @@ public class DigesterRequestLoader implements RequestLoader {
 
             // Get a reference to the top object
             Object top = getDigester().peek();
-            invokeExactMethod(top, "addHeader", new String[] { this.name, this.value }, new Class[] { String.class,
-                    String.class });
+            invokeExactMethod(top, "addHeader",
+                    new String[] { this.name, this.value },
+                    new Class[] { String.class, String.class });
         }
 
     }
+
 }

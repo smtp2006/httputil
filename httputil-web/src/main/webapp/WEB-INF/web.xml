@@ -41,7 +41,7 @@
 
     <servlet-mapping>
         <servlet-name>httputil</servlet-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.json</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

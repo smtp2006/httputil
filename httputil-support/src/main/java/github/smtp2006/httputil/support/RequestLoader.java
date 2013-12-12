@@ -3,7 +3,7 @@
  */
 package github.smtp2006.httputil.support;
 
-import github.smtp2006.httputil.RequestHolder;
+import github.smtp2006.httputil.NamespaceRequestHolder;
 
 /**
  * @email hua.wanghuawh@alibaba-inc.com;smtp2006@126.com
@@ -11,5 +11,5 @@ import github.smtp2006.httputil.RequestHolder;
  */
 public interface RequestLoader {
 
-    RequestHolder load(String file);
+    NamespaceRequestHolder load(String file);
 }
