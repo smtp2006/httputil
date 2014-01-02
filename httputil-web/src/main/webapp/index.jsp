@@ -8,24 +8,9 @@
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/jquery-easyui-1.3.5/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/jquery-easyui-1.3.5/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="<%=basePath%>/jquery-easyui-1.3.5/demo.css">
-    <script type="text/javascript" src="<%=basePath%>/jquery-easyui-1.3.5/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
-    <script type="text/javascript">
-        $.getJSON( "<%=basePath%>/index/menu.json", function( data ) {
-        	 var items = [];
-        	  $.each( data.data, function(index, item) {
-        		  $('#id_menu_list').accordion('add',{
-                      title:item.description,
-                      content:item.uri
-                  });
-        	  });
-        	 
-        
-        });
-    </script>
    
 </head>
-<body>
+<body path="<%=basePath%>">
     <h2>主页面</h2><div id="result"></div>
     <div class="demo-info">
         <div class="demo-tip icon-tip"></div>
@@ -36,10 +21,10 @@
         <!-- <div data-options="region:'north'" style="height:50px"></div> -->
        <!--  <div data-options="region:'south',split:true" style="height:50px;"></div> -->
         <div data-options="region:'east',split:true" title="East" style="width:180px;">
-            <ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',animate:true,dnd:true"></ul>
+            <ul class="easyui-tree"></ul>
         </div>
-        <div data-options="region:'west',split:true" title="服务列表" style="width:200px;">
-            <div id="id_menu_list" class="easyui-accordion" data-options="fit:true,border:false">
+        <div data-options="region:'west',split:true,iconCls:'icon-ok'" title="服务列表" style="width:200px;">
+            <div id="id_menu_list" data-options="fit:true,border:false">
                 <!-- 这里加载左边菜单列表
                 <div title="ACloudDB服务列表" style="padding:10px;">
                     content1
@@ -49,10 +34,9 @@
         </div>
         <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
             <div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-                <div title="About" data-options="href:'_content.html'" style="padding:10px"></div>
+                <div title="About" style="padding:10px"></div>
                 <div title="DataGrid" style="padding:5px">
-                    <table class="easyui-datagrid"
-                            data-options="url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
+                    <table class="easyui-datagrid">
                         <thead>
                             <tr>
                                 <th data-options="field:'itemid'" width="80">Item ID</th>
@@ -70,3 +54,7 @@
     </div>
 </body>
 </html>
+    <script type="text/javascript" src="<%=basePath%>/jquery-easyui-1.3.5/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/base.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/js/index.js"></script>

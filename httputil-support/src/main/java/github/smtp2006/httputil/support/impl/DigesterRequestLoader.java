@@ -32,6 +32,7 @@ public class DigesterRequestLoader implements RequestLoader {
         NamespaceRequestHolder nrw = new DefaultNamespaceRequestHolder();
         digester.push(nrw);
         InputStream fileInputStream = DigesterRequestLoader.class.getClassLoader().getResourceAsStream(file);
+        digester.addRule("beans/import", new ImportRule());
         // Create Object
         digester.addObjectCreate("namespace", DefaultRequestHolder.class);
         // setNamespace
@@ -49,6 +50,7 @@ public class DigesterRequestLoader implements RequestLoader {
         // Create Request
         digester.addObjectCreate("namespace/requestHolder/request", "class", DefaultRequest.class);
         digester.addSetProperties("namespace/requestHolder/request", "id", "name");
+        digester.addBeanPropertySetter("namespace/requestHolder/request/description");
         digester.addBeanPropertySetter("namespace/requestHolder/request/uri");
 
         digester.addRule("namespace/requestHolder/request/method", new HTTPMethodRule());
@@ -65,7 +67,22 @@ public class DigesterRequestLoader implements RequestLoader {
         }
         return nrw;
     }
+    private static class ImportRule extends Rule {
+        private String resouce;
+        @Override
+        public void begin(String namespace, String name, Attributes attributes) throws Exception {
+            super.begin(namespace, name, attributes);
+            this.resouce = attributes.getValue("resouce");
+        }
 
+        @Override
+        public void end(String namespace, String name) throws Exception {
+            super.end(namespace, name);
+            NamespaceRequestHolder nrh =  getDigester().peek();
+            nrh.merge(new DigesterRequestLoader().load(this.resouce));
+        }
+        
+    }
     private static class HTTPSchemeRule extends Rule {
 
         private HTTPScheme scheme;

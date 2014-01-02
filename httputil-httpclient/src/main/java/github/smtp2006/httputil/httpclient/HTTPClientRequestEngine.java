@@ -67,7 +67,7 @@ public class HTTPClientRequestEngine implements RequestEngine {
      */
     public void init() throws Exception {
 
-        requestConfig = RequestConfig.custom().setSocketTimeout(3000).setConnectTimeout(3000).build();
+        requestConfig = RequestConfig.custom().setSocketTimeout(30000).setConnectTimeout(30000).build();
 
         // Build SSLContext
         SSLContext sslcontext = buildSSLContext();
